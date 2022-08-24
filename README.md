@@ -88,10 +88,10 @@ In the following table, the top-x error value in `()` indicates the result of th
 
 |       Model        |   Dataset   | Top-1 error (val) | Top-5 error (val) |
 |:------------------:|:-----------:|:-----------------:|:-----------------:|
-| shufflenet_v2_x0_5 | ImageNet_1K | 38.9%(**41.1%**)  | 17.4%(**19.0%**)  |
-| shufflenet_v2_x1_0 | ImageNet_1K | 30.6%(**31.9%**)  | 11.1%(**13.6%**)  |
-| shufflenet_v2_x1_5 | ImageNet_1K | 27.4%(**29.9%**)  |  9.4%(**10.4%**)  |
-| shufflenet_v2_x2_0 | ImageNet_1K | 25.0%(**27.0%**)  |  7.6%(**9.2%**)   |
+| shufflenet_v2_x0_5 | ImageNet_1K | 38.9%(**38.9%**)  | 17.4%(**17.4%**)  |
+| shufflenet_v2_x1_0 | ImageNet_1K | 30.6%(**30.6%**)  | 11.1%(**11.1%**)  |
+| shufflenet_v2_x1_5 | ImageNet_1K | 27.4%(**27.4%**)  |  9.4%(**9.4%**)   |
+| shufflenet_v2_x2_0 | ImageNet_1K | 25.0%(**25.0%**)  |  7.6%(**7.6%**)   |
 
 ```bash
 # Download `ShuffleNetV2_x1_0-ImageNet_1K-25000dee.pth.tar` weights to `./results/pretrained_models`
