@@ -26,7 +26,7 @@ device = torch.device("cuda", 0)
 # Turning on when the image size does not change during training can speed up training
 cudnn.benchmark = True
 # Model arch name
-model_arch_name = "shufflenet_v1_x1_0"
+model_arch_name = "shufflenet_v2_x1_0"
 # Model normalization parameters
 model_mean_parameters = [0.485, 0.456, 0.406]
 model_std_parameters = [0.229, 0.224, 0.225]
@@ -47,7 +47,7 @@ if mode == "train":
     num_workers = 4
 
     # The address to load the pretrained model
-    pretrained_model_weights_path = "./results/pretrained_models/ShuffleNetV1_x1_0-ImageNet_1K-7a092cde.pth.tar"
+    pretrained_model_weights_path = "./results/pretrained_models/ShuffleNetV2_x1_0-ImageNet_1K-25000dee.pth.tar"
 
     # Incremental training and migration training
     resume = ""
@@ -86,4 +86,4 @@ if mode == "test":
     # How many iterations to print the testing result
     test_print_frequency = 20
 
-    model_weights_path = "./results/pretrained_models/ShuffleNetV1_x1_0-ImageNet_1K-7a092cde.pth.tar"
+    model_weights_path = "./results/pretrained_models/ShuffleNetV2_x1_0-ImageNet_1K-25000dee.pth.tar"

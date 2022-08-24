@@ -47,7 +47,7 @@ Both training and testing only need to modify the `config.py` file.
 - line 32: `model_std_parameters` change to `[0.229, 0.224, 0.225]`.
 - line 34: `model_num_classes` change to `1000`.
 - line 36: `mode` change to `test`.
-- line 89: `model_weights_path` change to `./results/pretrained_models/ShuffleNetV2_x1_0-ImageNet_1K-7a092cde.pth.tar`.
+- line 89: `model_weights_path` change to `./results/pretrained_models/ShuffleNetV2_x1_0-ImageNet_1K-25000dee.pth.tar`.
 
 ```bash
 python3 test.py
@@ -61,7 +61,7 @@ python3 test.py
 - line 34: `model_num_classes` change to `1000`.
 - line 36: `mode` change to `train`.
 - line 50: `pretrained_model_weights_path` change
-  to `./results/pretrained_models/ShuffleNetV2_x1_0-ImageNet_1K-7a092cde.pth.tar`.
+  to `./results/pretrained_models/ShuffleNetV2_x1_0-ImageNet_1K-25000dee.pth.tar`.
 
 ```bash
 python3 train.py
@@ -94,7 +94,7 @@ In the following table, the top-x error value in `()` indicates the result of th
 | shufflenet_v2_x2_0 | ImageNet_1K | 25.0%(**27.0%**)  |  7.6%(**9.2%**)   |
 
 ```bash
-# Download `ShuffleNetV2_x1_0-ImageNet_1K-7a092cde.pth.tar` weights to `./results/pretrained_models`
+# Download `ShuffleNetV2_x1_0-ImageNet_1K-25000dee.pth.tar` weights to `./results/pretrained_models`
 # More detail see `README.md<Download weights>`
 python3 ./inference.py 
 ```
@@ -107,7 +107,7 @@ Output:
 
 ```text
 Build `shufflenet_v2_x1_0` model successfully.
-Load `shufflenet_v2_x1_0` model weights `/ShuffleNetV2-PyTorch/results/pretrained_models/ShuffleNetV2_x1_0-ImageNet_1K-7a092cde.pth.tar` successfully.
+Load `shufflenet_v2_x1_0` model weights `/ShuffleNetV2-PyTorch/results/pretrained_models/ShuffleNetV2_x1_0-ImageNet_1K-25000dee.pth.tar` successfully.
 tench, Tinca tinca                                                          (84.78%)
 barracouta, snoek                                                           (2.71%)
 gar, garfish, garpike, billfish, Lepisosteus osseus                         (0.43%)
@@ -126,29 +126,28 @@ I look forward to seeing what the community does with these models!
 
 #### ShuffleNet V2: Practical Guidelines for Efficient CNN Architecture Design
 
-*Zhang, Xiangyu and Zhou, Xinyu and Lin, Mengxiao and Sun, Jian*
+*Ma, Ningning and Zhang, Xiangyu and Zheng, Hai-Tao and Sun, Jian*
 
 ##### Abstract
 
-We introduce an extremely computation-efficient CNN
-architecture named ShuffleNet, which is designed specially
-for mobile devices with very limited computing power (e.g.,
-10-150 MFLOPs). The new architecture utilizes two new
-operations, pointwise group convolution and channel shuffle, to greatly reduce computation cost while maintaining
-accuracy. Experiments on ImageNet classification and MS
-COCO object detection demonstrate the superior performance of ShuffleNet over other structures, e.g. lower top-1
-error (absolute 7.8%) than recent MobileNet on ImageNet classification task, under the computation budget of
-40 MFLOPs. On an ARM-based mobile device, ShuffleNet
-achieves ∼13× actual speedup over AlexNet while maintaining comparable accuracy.
+Currently, the neural network architecture design is mostly
+guided by the indirect metric of computation complexity, i.e., FLOPs.
+However, the direct metric, e.g., speed, also depends on the other factors
+such as memory access cost and platform characterics. Thus, this work
+proposes to evaluate the direct metric on the target platform, beyond
+only considering FLOPs. Based on a series of controlled experiments,
+this work derives several practical guidelines for efficient network design. Accordingly, a new architecture is
+presented, called ShuffleNet V2.
+Comprehensive ablation experiments verify that our model is the stateof-the-art in terms of speed and accuracy tradeoff.
 
 [[Paper]](https://arxiv.org/pdf/1807.11164v1.pdf)
 
 ```bibtex
-@inproceedings{zhang2018shufflenet,
-            title={Shufflenet: An extremely efficient convolutional neural network for mobile devices},
-            author={Zhang, Xiangyu and Zhou, Xinyu and Lin, Mengxiao and Sun, Jian},
-            booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
-            pages={6848--6856},
-            year={2018}
+@inproceedings{ma2018shufflenet, 
+            title={Shufflenet v2: Practical guidelines for efficient cnn architecture design},  
+            author={Ma, Ningning and Zhang, Xiangyu and Zheng, Hai-Tao and Sun, Jian},  
+            booktitle={Proceedings of the European Conference on Computer Vision (ECCV)},  
+            pages={116--131}, 
+            year={2018} 
 }
 ```
