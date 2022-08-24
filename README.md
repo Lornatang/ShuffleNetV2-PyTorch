@@ -1,14 +1,14 @@
-# ShuffleNetV1-PyTorch
+# ShuffleNetV2-PyTorch
 
 ## Overview
 
 This repository contains an op-for-op PyTorch reimplementation
-of [ShuffleNet: An Extremely Efficient Convolutional Neural Network for Mobile Devices](https://arxiv.org/pdf/1707.01083.pdf)
+of [ShuffleNet V2: Practical Guidelines for Efficient CNN Architecture Design](https://arxiv.org/pdf/1807.11164v1.pdf)
 .
 
 ## Table of contents
 
-- [ShuffleNetV1-PyTorch](#shufflenetv1-pytorch)
+- [ShuffleNetV2-PyTorch](#shufflenetv2-pytorch)
     - [Overview](#overview)
     - [Table of contents](#table-of-contents)
     - [Download weights](#download-weights)
@@ -20,7 +20,7 @@ of [ShuffleNet: An Extremely Efficient Convolutional Neural Network for Mobile D
     - [Result](#result)
     - [Contributing](#contributing)
     - [Credit](#credit)
-        - [ShuffleNet: An Extremely Efficient Convolutional Neural Network for Mobile Devices](#shufflenet-an-extremely-efficient-convolutional-neural-network-for-mobile-devices)
+        - [ShuffleNet V2: Practical Guidelines for Efficient CNN Architecture Design](#shufflenet-v2-practical-guidelines-for-efficient-cnn-architecture-design)
 
 ## Download weights
 
@@ -42,12 +42,12 @@ Both training and testing only need to modify the `config.py` file.
 
 ### Test
 
-- line 29: `model_arch_name` change to `shufflenet_v1_x1_0`.
+- line 29: `model_arch_name` change to `shufflenet_v2_x1_0`.
 - line 31: `model_mean_parameters` change to `[0.485, 0.456, 0.406]`.
 - line 32: `model_std_parameters` change to `[0.229, 0.224, 0.225]`.
 - line 34: `model_num_classes` change to `1000`.
 - line 36: `mode` change to `test`.
-- line 89: `model_weights_path` change to `./results/pretrained_models/ShuffleNetV1_x1_0-ImageNet_1K-7a092cde.pth.tar`.
+- line 89: `model_weights_path` change to `./results/pretrained_models/ShuffleNetV2_x1_0-ImageNet_1K-7a092cde.pth.tar`.
 
 ```bash
 python3 test.py
@@ -55,13 +55,13 @@ python3 test.py
 
 ### Train model
 
-- line 29: `model_arch_name` change to `shufflenet_v1_x1_0`.
+- line 29: `model_arch_name` change to `shufflenet_v2_x1_0`.
 - line 31: `model_mean_parameters` change to `[0.485, 0.456, 0.406]`.
 - line 32: `model_std_parameters` change to `[0.229, 0.224, 0.225]`.
 - line 34: `model_num_classes` change to `1000`.
 - line 36: `mode` change to `train`.
 - line 50: `pretrained_model_weights_path` change
-  to `./results/pretrained_models/ShuffleNetV1_x1_0-ImageNet_1K-7a092cde.pth.tar`.
+  to `./results/pretrained_models/ShuffleNetV2_x1_0-ImageNet_1K-7a092cde.pth.tar`.
 
 ```bash
 python3 train.py
@@ -69,12 +69,12 @@ python3 train.py
 
 ### Resume train model
 
-- line 29: `model_arch_name` change to `shufflenet_v1_x1_0`.
+- line 29: `model_arch_name` change to `shufflenet_v2_x1_0`.
 - line 31: `model_mean_parameters` change to `[0.485, 0.456, 0.406]`.
 - line 32: `model_std_parameters` change to `[0.229, 0.224, 0.225]`.
 - line 34: `model_num_classes` change to `1000`.
 - line 36: `mode` change to `train`.
-- line 53: `resume` change to `./samples/shufflenet_v1_x1_0-ImageNet_1K/epoch_xxx.pth.tar`.
+- line 53: `resume` change to `./samples/shufflenet_v2_x1_0-ImageNet_1K/epoch_xxx.pth.tar`.
 
 ```bash
 python3 train.py
@@ -82,19 +82,19 @@ python3 train.py
 
 ## Result
 
-Source of original paper results: [https://arxiv.org/pdf/1707.01083.pdf](https://arxiv.org/pdf/1707.01083.pdf))
+Source of original paper results: [https://arxiv.org/pdf/1807.11164v1.pdf](https://arxiv.org/pdf/1807.11164v1.pdf))
 
 In the following table, the top-x error value in `()` indicates the result of the project, and `-` indicates no test.
 
 |       Model        |   Dataset   | Top-1 error (val) | Top-5 error (val) |
 |:------------------:|:-----------:|:-----------------:|:-----------------:|
-| shufflenet_v1_x0_5 | ImageNet_1K | 41.2%(**41.1%**)  | 19.0%(**19.0%**)  |
-| shufflenet_v1_x1_0 | ImageNet_1K | 32.0%(**31.9%**)  | 13.6%(**13.6%**)  |
-| shufflenet_v1_x1_5 | ImageNet_1K | 29.0%(**29.9%**)  | 10.4%(**10.4%**)  |
-| shufflenet_v1_x2_0 | ImageNet_1K | 27.1%(**27.0%**)  |  9.2%(**9.2%**)   |
+| shufflenet_v2_x0_5 | ImageNet_1K | 38.9%(**41.1%**)  | 17.4%(**19.0%**)  |
+| shufflenet_v2_x1_0 | ImageNet_1K | 30.6%(**31.9%**)  | 11.1%(**13.6%**)  |
+| shufflenet_v2_x1_5 | ImageNet_1K | 27.4%(**29.9%**)  |  9.4%(**10.4%**)  |
+| shufflenet_v2_x2_0 | ImageNet_1K | 25.0%(**27.0%**)  |  7.6%(**9.2%**)   |
 
 ```bash
-# Download `ShuffleNetV1_x1_0-ImageNet_1K-7a092cde.pth.tar` weights to `./results/pretrained_models`
+# Download `ShuffleNetV2_x1_0-ImageNet_1K-7a092cde.pth.tar` weights to `./results/pretrained_models`
 # More detail see `README.md<Download weights>`
 python3 ./inference.py 
 ```
@@ -106,13 +106,13 @@ Input:
 Output:
 
 ```text
-Build `shufflenet_v1_x1_0` model successfully.
-Load `shufflenet_v1_x1_0` model weights `/ShuffleNetV1-PyTorch/results/pretrained_models/ShuffleNetV1_x1_0-ImageNet_1K-7a092cde.pth.tar` successfully.
-tench, Tinca tinca                                                          (54.11%)
-platypus, duckbill, duckbilled platypus, duck-billed platypus, Ornithorhynchus anatinus (4.75%)
-triceratops                                                                 (2.94%)
-armadillo                                                                   (2.64%)
-barracouta, snoek                                                           (2.63%)
+Build `shufflenet_v2_x1_0` model successfully.
+Load `shufflenet_v2_x1_0` model weights `/ShuffleNetV2-PyTorch/results/pretrained_models/ShuffleNetV2_x1_0-ImageNet_1K-7a092cde.pth.tar` successfully.
+tench, Tinca tinca                                                          (84.78%)
+barracouta, snoek                                                           (2.71%)
+gar, garfish, garpike, billfish, Lepisosteus osseus                         (0.43%)
+coho, cohoe, coho salmon, blue jack, silver salmon, Oncorhynchus kisutch    (0.28%)
+American lobster, Northern lobster, Maine lobster, Homarus americanus       (0.25%)
 ```
 
 ## Contributing
@@ -124,7 +124,7 @@ I look forward to seeing what the community does with these models!
 
 ### Credit
 
-#### ShuffleNet: An Extremely Efficient Convolutional Neural Network for Mobile Devices
+#### ShuffleNet V2: Practical Guidelines for Efficient CNN Architecture Design
 
 *Zhang, Xiangyu and Zhou, Xinyu and Lin, Mengxiao and Sun, Jian*
 
@@ -141,7 +141,7 @@ error (absolute 7.8%) than recent MobileNet on ImageNet classification task, und
 40 MFLOPs. On an ARM-based mobile device, ShuffleNet
 achieves ∼13× actual speedup over AlexNet while maintaining comparable accuracy.
 
-[[Paper]](https://arxiv.org/pdf/1707.01083.pdf)
+[[Paper]](https://arxiv.org/pdf/1807.11164v1.pdf)
 
 ```bibtex
 @inproceedings{zhang2018shufflenet,

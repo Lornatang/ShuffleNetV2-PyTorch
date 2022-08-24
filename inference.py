@@ -47,10 +47,10 @@ def choice_device(device_type: str) -> torch.device:
 
 
 def build_model(model_arch_name: str, model_num_classes: int, device: torch.device) -> [nn.Module, nn.Module]:
-    shufflenet_v1_model = model.__dict__[model_arch_name](num_classes=model_num_classes)
-    shufflenet_v1_model = shufflenet_v1_model.to(device=device)
+    shufflenet_v2_model = model.__dict__[model_arch_name](num_classes=model_num_classes)
+    shufflenet_v2_model = shufflenet_v2_model.to(device=device)
 
-    return shufflenet_v1_model
+    return shufflenet_v2_model
 
 
 def preprocess_image(image_path: str, image_size: int, device: torch.device) -> torch.Tensor:
@@ -78,22 +78,22 @@ def main():
     device = choice_device(args.device_type)
 
     # Initialize the model
-    shufflenet_v1_model = build_model(args.model_arch_name, args.model_num_classes, device)
+    shufflenet_v2_model = build_model(args.model_arch_name, args.model_num_classes, device)
     print(f"Build `{args.model_arch_name}` model successfully.")
 
     # Load model weights
-    shufflenet_v1_model, _, _, _, _, _ = load_state_dict(shufflenet_v1_model, args.model_weights_path)
+    shufflenet_v2_model, _, _, _, _, _ = load_state_dict(shufflenet_v2_model, args.model_weights_path)
     print(f"Load `{args.model_arch_name}` model weights `{os.path.abspath(args.model_weights_path)}` successfully.")
-    # print(shufflenet_v1_model.state_dict())
+    # print(shufflenet_v2_model.state_dict())
 
     # Start the verification mode of the model.
-    shufflenet_v1_model.eval()
+    shufflenet_v2_model.eval()
 
     tensor = preprocess_image(args.image_path, args.image_size, device)
 
     # Inference
     with torch.no_grad():
-        output = shufflenet_v1_model(tensor)
+        output = shufflenet_v2_model(tensor)
 
     # Calculate the five categories with the highest classification probability
     prediction_class_index = torch.topk(output, k=5).indices.squeeze(0).tolist()
@@ -107,12 +107,12 @@ def main():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model_arch_name", type=str, default="shufflenet_v1_x1_0")
+    parser.add_argument("--model_arch_name", type=str, default="shufflenet_v2_x1_0")
     parser.add_argument("--model_mean_parameters", type=list, default=[0.485, 0.456, 0.406])
     parser.add_argument("--model_std_parameters", type=list, default=[0.229, 0.224, 0.225])
     parser.add_argument("--class_label_file", type=str, default="./data/ImageNet_1K_labels_map.txt")
     parser.add_argument("--model_num_classes", type=int, default=1000)
-    parser.add_argument("--model_weights_path", type=str, default="./results/pretrained_models/ShuffleNetV1_x1_0-ImageNet_1K-7a092cde.pth.tar")
+    parser.add_argument("--model_weights_path", type=str, default="./results/pretrained_models/ShuffleNetV2_x1_0-ImageNet_1K.pth.tar")
     parser.add_argument("--image_path", type=str, default="./figure/n01440764_36.JPEG")
     parser.add_argument("--image_size", type=int, default=224)
     parser.add_argument("--device_type", type=str, default="cpu", choices=["cpu", "cuda"])
